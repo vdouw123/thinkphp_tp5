@@ -1,0 +1,268 @@
+/* 源码编写：微豆网 张三丰 */
+html, body {
+    min-height: 100%;
+    background: #f9f9f9;
+}
+
+.middle-left-right {
+    margin: 0 auto;
+}
+
+.vdouw-home header {
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
+    background: #aeaeae;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
+.vdouw-home header .middle-left-right {
+    height: 60px;
+    line-height: 60px;
+}
+
+.member-headpic {
+    width: 32px;
+    height: 32px;
+    margin-top: 14px;
+}
+
+.vdouw-home article {
+    height: 100%;
+    padding: 60px 0 90px 0;
+}
+
+.article-ul li, .article-box {
+    background: white;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    -moz-box-shadow:: 0 0 3px #ccc;
+    box-shadow:: 0 0 3px #ccc;
+    padding: 15px 20px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.article-ul li .img {
+    width: 225px;
+    height: 150px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.article-ul li div .pull-left:nth-child(1) {
+    width: 250px;
+}
+
+.article-ul li div .pull-left:nth-child(2) {
+    width: 500px;
+}
+
+.article-ul li div .pull-left:nth-child(2) > div.p {
+    line-height: 28px;
+    max-height: 112px;
+    overflow: hidden;
+}
+
+.article-ul li div .pull-left:nth-child(2) > div.a a {
+    display: block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    background: #ccc;
+    text-align: center;
+    border-radius: 5px;
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+}
+
+.vdouw-home article .width1200.middle-left-right > .pull-right {
+    width: 380px;
+    margin-left: 20px;
+    min-height: 500px;
+    padding-top: 20px;
+}
+
+article .pull-right .box {
+    -webkit-box-shadow: 0 0 3px #ccc;
+    -moz-box-shadow:: 0 0 3px #ccc;
+    box-shadow:: 0 0 3px #ccc;
+    padding: 15px 20px 10px 20px;
+    border-radius: 5px;
+    background: white;
+    margin-bottom: 20px;
+}
+
+article .pull-right .box.tags li {
+    float: left;
+    background: red;
+    border-radius: 20px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    padding: 2px 10px;
+    max-width: 100%;
+    color: white;
+}
+
+article .pull-right .box.tags li a {
+    color: white;
+}
+
+article .pull-right .box.recommend li {
+    height: 25px;
+    line-height: 25px;
+}
+
+article .pull-right .box.comment li {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+article .pull-right .box.comment li .left {
+    width: 32px;
+    height: 32px;
+}
+
+article .pull-right .box.comment li .left img {
+    width: 32px;
+    height: 32px;
+    margin-top: 3px;
+}
+
+article .pull-right .box.comment li .right {
+    flex: 1;
+    padding-left: 10px;
+}
+
+article .pull-right .box.comment li .a {
+    max-width: 242px;
+    display: inline-block;
+}
+
+article .pull-right .box.comment li .right .c-light {
+    color: #c4a699;
+}
+
+article .pull-right .box.comment li .right .p {
+    line-height: 20px;
+    max-height: 40px;
+    overflow: hidden;
+}
+
+.vdouw-home footer {
+    background: #aeaeae;
+    line-height: 30px;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/*文章正文*/
+.article-box .title {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.article-box .content .con {
+    line-height: 180%;
+    min-height: 500px;
+}
+
+.article-box .content .con img {
+    display: block;
+    max-width: 758px;
+}
+
+.article-box .comment-box {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.article-box .comment-box .left, .comment-box .left img {
+    width: 50px;
+    height: 50px;
+}
+
+.article-box .comment-box .right {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.article-box .comment-box .right textarea {
+    width: 100%;
+    height: 120px;
+    padding: 10px 15px;
+    line-height: 20px;
+    border-radius: 5px;
+}
+
+.article-box .comment-list dt {
+    border-bottom: 1px solid #ccc;
+    margin-top: 40px;
+    padding-bottom: 10px;
+}
+
+.article-box .comment-list dd li, .article-box .comment-list dd li .son {
+    display: flex;
+    margin-top: 20px;
+}
+
+.article-box .comment-list dd li .left, .article-box .comment-list dd li .left img {
+    width: 50px;
+    height: 50px;
+}
+
+.article-box .comment-list dd li .right, .article-box .comment-list dd li .right .son {
+    flex: 1;
+}
+
+.article-box .comment-list dd li .right {
+    margin-left: 10px;
+}
+
+.login-register-box {
+    -webkit-box-shadow: 0 0 3px #ccc;
+    -moz-box-shadow:: 0 0 3px #ccc;
+    box-shadow:: 0 0 3px #ccc;
+    padding: 15px 20px 20px 20px;
+    border-radius: 5px;
+    background: white;
+    width: 500px;
+    margin: 50px 0 0 100px;
+}
+
+.login-register-box .p {
+    display: flex;
+    height: 30px;
+    line-height: 30px;
+}
+
+.login-register-box .p .left {
+    width: 100px;
+}
+
+.login-register-box .p .right {
+    flex: 1;
+}
+
+.login-register-box .p .right input {
+    height: 34px;
+}
+
+.login-register-box .p .right .code {
+    width: 38%;
+    margin-left: 2%;
+    height: 33px;
+    float: left;
+    border-radius: 3px;
+}

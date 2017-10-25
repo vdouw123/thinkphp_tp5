@@ -1,0 +1,205 @@
+<{include file="public/header" /}>
+
+<body class="vdouw-main-body">
+<div class="vdouw-admin-position">
+    <i class="icon-home mr-3"></i><span>后台首页</span>
+    <cite class="ml-3 mr-3">></cite>
+    <span>文章管理</span>
+</div>
+<div class="mt-10 mb-10 vdouw-admin-title">
+    <b class="font20 height-100">文章列表</b>
+    <i class="ml-10 mr-10">|</i>
+    <a class="c-pointer color-admin-blue" href="/index.php/admin/news/add" target="right_content">添加文章</a>
+</div>
+<table class="width100 vdouw-table" cellpadding="0" cellspacing="0">
+    <thead>
+    <tr>
+        <td class="text-overflow">ID</td>
+        <td>所属栏目</td>
+        <td>标题</td>
+        <td>标签</td>
+        <td>作者</td>
+        <td class="text-align-center">原创</td>
+        <td class="text-align-center">审核</td>
+        <td class="text-align-center">置顶</td>
+        <td class="text-align-center">点击数</td>
+        <td>发布时间</td>
+        <td>操作</td>
+    </tr>
+    </thead>
+    <tbody>
+    <form id="vdouw-form">
+        <{volist name="allNews" id="vo"}>
+        <tr>
+            <td><{$vo.id}></td>
+            <td><{$vo.category_name.name}></td>
+            <td>
+                <{if condition="strlen(json_encode($vo.titleimg))<3"}>
+                <{$vo.title}>
+                <{else/}>
+                <{$vo.title}><span class="color-admin-blue">【图】</span>
+                <{/if}>
+            </td>
+            <td>
+                <{volist name="$vo.tag" id="t"}>
+                <span class="mr-10"><{$t.name}></span>
+                <{/volist}>
+            </td>
+            <td><{$vo.author}></td>
+            <td class="text-align-center">
+                <{if condition="$vo.is_original=='1'"}>
+                <i class="c-pointer vdouw_original icon-ok" title="点击切换状态" data-id="<{$vo.id}>"
+                   data-value="<{$vo.is_original}>"></i>
+                <{else/}>
+                <i class="c-pointer vdouw_original icon-remove" title="点击切换状态" data-id="<{$vo.id}>"
+                   data-value="<{$vo.is_original}>"></i>
+                <{/if}>
+            </td>
+            <td class="text-align-center">
+                <{if condition=" $vo.is_show=='1'"}>
+                <i class="c-pointer vdouw_isshow icon-ok" title="点击切换状态" data-id="<{$vo.id}>"
+                   data-value="<{$vo.is_show}>"></i>
+                <{else/}>
+                <i class="c-pointer vdouw_isshow icon-remove" title="点击切换状态" data-id="<{$vo.id}>"
+                   data-value="<{$vo.is_show}>"></i>
+                <{/if}>
+            </td>
+            <td class="text-align-center">
+                <{if condition="$vo.is_top=='1'"}>
+                <i class="c-pointer vdouw_istop icon-ok" title="点击切换状态" data-id="<{$vo.id}>"
+                   data-value="<{$vo.is_top}>"></i>
+                <{else/}>
+                <i class="c-pointer vdouw_istop icon-remove" title="点击切换状态" data-id="<{$vo.id}>"
+                   data-value="<{$vo.is_top}>"></i>
+                <{/if}>
+            </td>
+            <td class="text-align-center"><{$vo.click}></td>
+            <td><{$vo.addtime|date="Y-m-d H:i:s",###}></td>
+            <td>
+                <a class="color-admin-blue" title="<{$vo.title}>" href="#">查看</a>
+                <i class="ml-3 mr-3">|</i>
+                <a class="c-pointer color-admin-blue" title="修改" href="/index.php/admin/news/edit/id/<{$vo.id}>">修改</a>
+                <i class="ml-3 mr-3">|</i>
+                <span class="c-pointer color-admin-blue vdouw-delete" data-id="<{$vo.id}>" title="删除">删除</span>
+            </td>
+        </tr>
+        <{/volist}>
+    </form>
+    </tbody>
+</table>
+
+<script>
+    var SCOPE = {
+        "set_original_url": "/index.php/admin/news/original",    //原创
+        "set_isshow_url": "/index.php/admin/news/isshow",        //审核
+        "set_istop_url": "/index.php/admin/news/istop",          //置顶
+        "set_status_url": "/index.php/admin/news/delete"         //删除
+    };
+
+    //是否原创
+    $('.vdouw_original').click(function () {
+        var $data = {
+            'id': $(this).attr('data-id'),
+            'is_original': Number($(this).attr('data-value') == "1" ? "0" : "1")
+        };
+        layer.open({
+            type: 0,
+            title: '审核确认框',
+            btn: ['确定', '取消'],
+            icon: 3,
+            closeBtn: 2,
+            content: '你确定要切换原创的状态吗？',
+            scrollbar: true,
+            yes: function () {
+                $.post(SCOPE.set_original_url, $data, function (s) {
+                    if (s.status == 1) {
+                        return dialog.success(s.message, '');
+                    } else {
+                        return dialog.error(s.message);
+                    }
+                }, "JSON");
+            }
+        })
+    });
+
+    //是否审核
+    $('.vdouw_isshow').click(function () {
+        var $data = {
+            'id': $(this).attr('data-id'),
+            'is_show': Number($(this).attr('data-value') == "1" ? "0" : "1")
+        };
+        layer.open({
+            type: 0,
+            title: '审核确认框',
+            btn: ['确定', '取消'],
+            icon: 3,
+            closeBtn: 2,
+            content: '你确定要切换审核的状态吗？',
+            scrollbar: true,
+            yes: function () {
+                $.post(SCOPE.set_isshow_url, $data, function (s) {
+                    if (s.status == 1) {
+                        return dialog.success(s.message, '');
+                    } else {
+                        return dialog.error(s.message);
+                    }
+                }, "JSON");
+            }
+        })
+    });
+
+    //置顶
+    $('.vdouw_istop').click(function () {
+        var $data = {
+            'id': $(this).attr('data-id'),
+            'is_top': Number($(this).attr('data-value') == "1" ? "0" : "1")
+        };
+        layer.open({
+            type: 0,
+            title: '审核确认框',
+            btn: ['确定', '取消'],
+            icon: 3,
+            closeBtn: 2,
+            content: '你确定要切换审核的状态吗？',
+            scrollbar: true,
+            yes: function () {
+                $.post(SCOPE.set_istop_url, $data, function (s) {
+                    if (s.status == 1) {
+                        return dialog.success(s.message, '');
+                    } else {
+                        return dialog.error(s.message);
+                    }
+                }, "JSON");
+            }
+        })
+    });
+
+    //删除
+    $('.vdouw-delete').click(function () {
+        var $data = {
+            'id': $(this).attr('data-id'),
+            'status': 0
+        };
+        layer.open({
+            type: 0,
+            title: '审核确认框',
+            btn: ['确定', '取消'],
+            icon: 3,
+            closeBtn: 2,
+            content: '你确定要删除吗？',
+            scrollbar: true,
+            yes: function () {
+                $.post(SCOPE.set_status_url, $data, function (s) {
+                    if (s.status == 1) {
+                        return dialog.success(s.message, '');
+                    } else {
+                        return dialog.error(s.message);
+                    }
+                }, "JSON");
+            }
+        })
+    });
+
+</script>
+
+<{include file="public/footer" /}>
